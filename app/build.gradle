@@ -22,9 +22,7 @@ allprojects {
 apply plugin: "com.android.application"
 
 dependencies {
-    //implementation project(":libraries:Jumble")
-    implementation project(path: ":libraries:Jumble", configuration: "release")
-  //  implementation fileTree(dir: "../libraries/Jumble", include: ["*.jar"])
+    implementation project(":libraries:Jumble")
     implementation "androidx.appcompat:appcompat:1.4.1"
     implementation "com.google.android.material:material:1.5.0"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
