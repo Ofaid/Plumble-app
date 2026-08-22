@@ -18,42 +18,45 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath "com.android.tools.build:gradle:2.2.3"
     }
 }
-apply plugin: 'com.android.application'
 
-repositories {
-    mavenCentral()
-    jcenter()
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 }
+
+apply plugin: "com.android.application"
 
 dependencies {
     compile project(":libraries:Jumble")
-    compile 'com.android.support:support-v4:21.+'
-    compile 'com.android.support:appcompat-v7:21.+'
-    compile 'com.android.support:cardview-v7:21.+'
-    compile 'com.android.support:palette-v7:21.+'
-    compile 'com.android.support:recyclerview-v7:21.+'
-    compile 'org.jsoup:jsoup:1.7.2'
-    compile 'info.guardianproject.netcipher:netcipher:1.2'
+    compile "com.android.support:support-v4:21.+"
+    compile "com.android.support:appcompat-v7:21.+"
+    compile "com.android.support:cardview-v7:21.+"
+    compile "com.android.support:palette-v7:21.+"
+    compile "com.android.support:recyclerview-v7:21.+"
+    compile "org.jsoup:jsoup:1.7.2"
+    compile "info.guardianproject.netcipher:netcipher:1.2"
 }
 
-
 // Keep my credentials private :^)
-def signingFile = file 'signing.gradle';
-if (signingFile.exists()) apply from: 'signing.gradle'
+def signingFile = file "signing.gradle"
+if (signingFile.exists()) apply from: "signing.gradle"
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
 
     defaultConfig {
+        applicationId "com.morlunk.mumbleclient"
         minSdkVersion 12
         targetSdkVersion 21
-        applicationId "com.morlunk.mumbleclient"
         versionCode 73
         versionName "3.3.0-rc1"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -61,18 +64,14 @@ android {
     }
 
     productFlavors {
-
         official {
             applicationId "com.morlunk.mumbleclient"
         }
-
         free {
             applicationId "com.morlunk.mumbleclient.free"
             buildConfigField "boolean", "DONATE_NAG", "true"
         }
-
         jenkins {
-            // Abuse Jenkins environment variables. Neat.
             def env = System.getenv()
             if (env.containsKey("BUILD_NUMBER") && env.containsKey("BUILD_DISPLAY_NAME")) {
                 versionCode Integer.parseInt(env.get("BUILD_NUMBER"))
