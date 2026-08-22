@@ -13,10 +13,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Siapkan Java 17
+      - name: Siapkan Java 
         uses: actions/setup-java@v4
         with:
-          java-version: "11"
+          java-version: "8"
           distribution: "temurin"
 
       - name: Siapkan Gradle
